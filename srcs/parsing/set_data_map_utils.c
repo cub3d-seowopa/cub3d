@@ -6,13 +6,13 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:34 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 18:18:32 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:40:46 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**check_rgb_form(char *str)
+static char	**check_rgb_form(char *str)
 {
 	char	**ret;
 	int		i;

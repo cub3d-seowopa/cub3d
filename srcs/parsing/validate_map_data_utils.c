@@ -6,13 +6,13 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:56:52 by seowoo            #+#    #+#             */
-/*   Updated: 2023/02/27 19:30:51 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:38:26 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_boundary_wall(char *map_line, int index, int max_line)
+static int	is_boundary_wall(char *map_line, int index, int max_line)
 {
 	int	len;
 	int	start_wall;
@@ -38,7 +38,7 @@ int	is_boundary_wall(char *map_line, int index, int max_line)
 	return (1);
 }
 
-int	check_all_neighbor(t_map_data *_data)
+static int	check_all_neighbor(t_map_data *_data)
 {
 	int	i;
 	int	j;
@@ -64,7 +64,7 @@ int	check_all_neighbor(t_map_data *_data)
 	return (1);
 }
 
-int	check_map_elements(t_map_data *_data)
+static int	check_map_elements(t_map_data *_data)
 {
 	int		i;
 	int		j;
@@ -90,6 +90,30 @@ int	check_map_elements(t_map_data *_data)
 	}
 	if (count_player == 0)
 		return (print_error_msg("There is no player in the map", 0));
+	return (1);
+}
+
+int	check_path_is_valided(t_map_data *_data)
+{
+	int	fd;
+
+	fd = 0;
+	fd = open(_data->north_tex_path, O_RDONLY);
+	if (fd < 0)
+		return (print_error_msg("North texture path is invaild", 0));
+	close(fd);
+	fd = open(_data->south_tex_path, O_RDONLY);
+	if (fd < 0)
+		return (print_error_msg("South texture path is invaild", 0));
+	close(fd);
+	fd = open(_data->west_tex_path, O_RDONLY);
+	if (fd < 0)
+		return (print_error_msg("West texture path is invaild", 0));
+	close(fd);
+	fd = open(_data->east_tex_path, O_RDONLY);
+	if (fd < 0)
+		return (print_error_msg("East texture path is invaild", 0));
+	close(fd);
 	return (1);
 }
 

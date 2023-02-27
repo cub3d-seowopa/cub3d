@@ -6,35 +6,11 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:19:11 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 19:29:26 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:39:05 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	check_path_is_valided(t_map_data *_data)
-{
-	int	fd;
-
-	fd = 0;
-	fd = open(_data->north_tex_path, O_RDONLY);
-	if (fd < 0)
-		return (print_error_msg("North texture path is invaild", 0));
-	close(fd);
-	fd = open(_data->south_tex_path, O_RDONLY);
-	if (fd < 0)
-		return (print_error_msg("South texture path is invaild", 0));
-	close(fd);
-	fd = open(_data->west_tex_path, O_RDONLY);
-	if (fd < 0)
-		return (print_error_msg("West texture path is invaild", 0));
-	close(fd);
-	fd = open(_data->east_tex_path, O_RDONLY);
-	if (fd < 0)
-		return (print_error_msg("East texture path is invaild", 0));
-	close(fd);
-	return (1);
-}
 
 int	check_map_data_vaildation(t_map_data *_data, int fd)
 {

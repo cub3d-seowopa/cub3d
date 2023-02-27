@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 19:30:02 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:43:42 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void		free_all_memory(t_mlx_info *_info, t_map_data *_data);
 int			init(t_map_data **_data, char *av);
 	/* set_data_map.c */
 int			read_map_file(t_map_data *_data, const char *map_path);
-int			put_map_data(char *str, t_map_data *_data);
-char		*check_identifier(char *str, int *value_start_index);
 	/* set_data_map_utils.c */
 char		*get_texture_path(t_map_data *_data, char *str,
 				int path_start_index);
@@ -54,11 +52,12 @@ int			check_data_is_full(t_map_data *_data);
 int			check_map_data_vaildation(t_map_data *_data, int fd);
 	/* validate_map_data_utils.c */
 int			check_map(t_map_data *_data);
+int			check_path_is_valided(t_map_data *_data);
 	/* parsing_utils.c */
 int			ft_my_strstr(char *str1, char *str2);
 int			check_rgb(int rgb);
 int			free_strings(char *str1, char *str2, int return_value);
-void		print_map_data(t_map_data *_data);
 int			ft_free_double_string(char **str, int ret);
+void		print_map_data(t_map_data *_data);
 
 #endif /* CUB3D_H */

@@ -6,13 +6,13 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 16:44:16 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 19:06:07 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:56:10 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*check_identifier(char *str, int *value_start_index)
+static char	*check_identifier(char *str, int *value_start_index)
 {
 	int		i;
 	int		j;
@@ -34,16 +34,12 @@ char	*check_identifier(char *str, int *value_start_index)
 		return (NULL);
 	i = 0;
 	while (str[tmp_i] && str[tmp_i] != ' ')
-	{
-		ret[i] = str[tmp_i];
-		++i;
-		++tmp_i;
-	}
+		ret[i++] = str[tmp_i++];
 	ret[i] = '\0';
 	return (ret);
 }
 
-void	make_map(char *str, t_map_data *_data)
+static void	make_map(char *str, t_map_data *_data)
 {
 	char	**tmp_map;
 	int		i;
@@ -63,7 +59,7 @@ void	make_map(char *str, t_map_data *_data)
 	ft_free_double_string(tmp_map, 1);
 }
 
-int	put_map_data(char *str, t_map_data *_data)
+static int	put_map_data(char *str, t_map_data *_data)
 {
 	char	*identifier;
 	int		i;

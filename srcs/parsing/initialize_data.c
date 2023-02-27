@@ -6,13 +6,13 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:43:48 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 17:30:42 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:43:09 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	map_elements_init(t_map_data *_data)
+static void	map_elements_init(t_map_data *_data)
 {
 	_data->ceiling_b = -1;
 	_data->ceiling_g = -1;
@@ -31,17 +31,17 @@ void	map_elements_init(t_map_data *_data)
 	_data->bool_ceiling = 0;
 }
 
-t_mlx_info	*mlx_info_init(t_mlx_info *_info)
-{
-	_info = (t_mlx_info *)malloc(sizeof(t_mlx_info));
-	if (!_info)
-		return (NULL);
-	_info->mlx_ptr = mlx_init();
-	_info->win_ptr = mlx_new_window(_info->mlx_ptr, 500, 400, "cub3d");
-	return (_info);
-}
+// static t_mlx_info	*mlx_info_init(t_mlx_info *_info)
+// {
+// 	_info = (t_mlx_info *)malloc(sizeof(t_mlx_info));
+// 	if (!_info)
+// 		return (NULL);
+// 	_info->mlx_ptr = mlx_init();
+// 	_info->win_ptr = mlx_new_window(_info->mlx_ptr, 500, 400, "cub3d");
+// 	return (_info);
+// }
 
-t_map_data	*map_data_init(t_map_data *_data)
+static t_map_data	*map_data_init(t_map_data *_data)
 {
 	_data = (t_map_data *)malloc(sizeof(t_map_data));
 	if (!_data)
