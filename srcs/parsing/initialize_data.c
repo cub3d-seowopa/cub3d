@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:43:48 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 19:43:09 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 21:13:29 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	map_elements_init(t_map_data *_data)
 	_data->num_of_map_line = 0;
 	_data->bool_floor = 0;
 	_data->bool_ceiling = 0;
+	_data->floor_rgb = 0;
+	_data->ceiling_rgb = 0;
 }
 
 // static t_mlx_info	*mlx_info_init(t_mlx_info *_info)
