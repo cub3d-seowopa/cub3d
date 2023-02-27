@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowoo <seowoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:43:48 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/26 20:09:00 by seowoo           ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 17:30:42 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	map_elements_init(t_map_data *_data)
 	_data->map = NULL;
 	_data->num_of_data_except_map = 0;
 	_data->num_of_map_line = 0;
+	_data->bool_floor = 0;
+	_data->bool_ceiling = 0;
 }
 
 t_mlx_info	*mlx_info_init(t_mlx_info *_info)

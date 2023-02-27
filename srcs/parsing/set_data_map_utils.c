@@ -3,43 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   set_data_map_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowoo <seowoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:34 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/26 21:13:14 by seowoo           ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 18:18:32 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*check_identifier(char *str, int *value_start_index)
+char	**check_rgb_form(char *str)
 {
+	char	**ret;
 	int		i;
-	int		j;
-	int		tmp_i;
-	char	*ret;
+	int		num_of_comma;
 
-	i = 0;
-	j = 0;
-	while (str[i] && str[i] == ' ')
-		++i;
-	while (str[i + j] && str[i + j] != ' ')
-		++j;
-	tmp_i = i;
-	while (str[i + j] && str[i + j] == ' ')
-		++i;
-	*value_start_index = i + j;
-	ret = (char *)malloc(sizeof(char) * (j + 1));
-	if (!ret)
+	i = -1;
+	num_of_comma = 0;
+	while (str[++i])
+		if (str[i] == ',')
+			++num_of_comma;
+	if (num_of_comma != 2)
 		return (NULL);
-	i = 0;
-	while (str[tmp_i] && str[tmp_i] != ' ')
+	ret = ft_split(str, ", ");
+	if (ret == NULL)
+		return (NULL);
+	i = -1;
+	while (ret[++i])
+		;
+	if (i != 3)
 	{
-		ret[i] = str[tmp_i];
-		++i;
-		++tmp_i;
+		ft_free_double_string(ret, 0);
+		return (NULL);
 	}
-	ret[i] = '\0';
 	return (ret);
 }
 
@@ -78,11 +74,9 @@ int	get_floor_rgb(t_map_data *_data, char *str, int rgb_start_index)
 	int		i;
 	int		j;
 
-	i = -1;
-	_tmp = ft_split(&str[rgb_start_index], ", ");
-	while (_tmp[++i])
-		if (i > 2)
-			return (ft_free_double_string(_tmp, 0));
+	_tmp = check_rgb_form(&str[rgb_start_index]);
+	if (!_tmp)
+		return (print_error_msg("Check floor's rgb form", 0));
 	i = -1;
 	while (_tmp[++i])
 	{
@@ -98,6 +92,7 @@ int	get_floor_rgb(t_map_data *_data, char *str, int rgb_start_index)
 			_data->floor_b = ft_atoi(_tmp[i]);
 	}
 	++(_data->num_of_data_except_map);
+	_data->bool_floor = 1;
 	return (ft_free_double_string(_tmp, 1));
 }
 
@@ -107,11 +102,9 @@ int	get_ceiling_rgb(t_map_data *_data, char *str, int rgb_start_index)
 	int		i;
 	int		j;
 
-	i = -1;
-	_tmp = ft_split(&str[rgb_start_index], ", ");
-	while (_tmp[++i])
-		if (i > 2)
-			return (ft_free_double_string(_tmp, 0));
+	_tmp = check_rgb_form(&str[rgb_start_index]);
+	if (!_tmp)
+		return (print_error_msg("Check ceiling's rgb form", 0));
 	i = -1;
 	while (_tmp[++i])
 	{
@@ -127,6 +120,7 @@ int	get_ceiling_rgb(t_map_data *_data, char *str, int rgb_start_index)
 			_data->ceiling_b = ft_atoi(_tmp[i]);
 	}
 	++(_data->num_of_data_except_map);
+	_data->bool_ceiling = 1;
 	return (ft_free_double_string(_tmp, 1));
 }
 

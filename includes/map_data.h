@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowoo <seowoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:03:36 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/26 20:08:29 by seowoo           ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 17:29:48 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ typedef struct s_map_data{
 	int		floor_r;
 	int		floor_g;
 	int		floor_b;
+	int		bool_floor;
 	int		ceiling_r;
 	int		ceiling_g;
 	int		ceiling_b;
+	int		bool_ceiling;
 	char	**map;
 	int		num_of_data_except_map;
 	int		num_of_map_line;

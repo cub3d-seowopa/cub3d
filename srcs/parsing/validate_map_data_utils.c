@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_data_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowoo <seowoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:56:52 by seowoo            #+#    #+#             */
-/*   Updated: 2023/02/26 23:23:40 by seowoo           ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 17:41:29 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	check_all_neighbor(t_map_data *_data)
 	int	j;
 
 	i = -1;
-	printf("%d\n", _data->num_of_map_line);
 	while (++i < _data->num_of_map_line - 1)
 	{
 		j = -1;

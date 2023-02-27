@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowoo <seowoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/26 23:07:03 by seowoo           ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 18:20:39 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int			init(t_map_data **_data, char *av);
 	/* set_data_map.c */
 int			read_map_file(t_map_data *_data, const char *path);
 int			put_map_data(char *str, t_map_data *_data);
-	/* set_data_map_utils.c */
 char		*check_identifier(char *str, int *value_start_index);
+	/* set_data_map_utils.c */
 char		*get_texture_path(t_map_data *_data, char *str,
 				int path_start_index);
 int			get_floor_rgb(t_map_data *_data, char *str, int rgb_start_index);
 int			get_ceiling_rgb(t_map_data	*_data, char *str, int rgb_start_index);
 int			check_data_is_full(t_map_data *_data);
 	/* validate_map_data.c */
-int			check_map_data_vaildation(t_map_data *_data);
+int			check_map_data_vaildation(t_map_data *_data, int fd);
 	/* validate_map_data_utils.c */
 int			check_all_neighbor(t_map_data *_data);
 int			is_boundary_wall(char *map_line, int index, int max_line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowoo <seowoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:26:22 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/26 23:22:24 by seowoo           ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 18:24:41 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,15 @@ int	check_rgb(int rgb)
 
 void	print_map_data(t_map_data *_data)
 {
-	printf("NORTH : %s\n", _data->north_tex_path);
-	printf("SOUTH : %s\n", _data->south_tex_path);
-	printf("EAST : %s\n", _data->east_tex_path);
-	printf("WEST : %s\n", _data->west_tex_path);
+	printf("NORTH : [%s]\n", _data->north_tex_path);
+	printf("SOUTH : [%s]\n", _data->south_tex_path);
+	printf("EAST : [%s]\n", _data->east_tex_path);
+	printf("WEST : [%s]\n", _data->west_tex_path);
 	printf("Floor RGB : [%d] [%d] [%d]\n", _data->floor_r, _data->floor_g, _data->floor_b);
 	printf("Ceiling RGB : [%d] [%d] [%d]\n", _data->ceiling_r, _data->ceiling_g, _data->ceiling_b);
 	printf("\n\tMAP\n");
+	if (!_data->map)
+		return ;
 	for(int i = 0; _data->map[i] != NULL; i++)
 		printf("[%d] : %s\n", i, _data->map[i]);
 }
