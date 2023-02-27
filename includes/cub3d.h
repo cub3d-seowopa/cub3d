@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 18:20:39 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:30:02 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		free_all_memory(t_mlx_info *_info, t_map_data *_data);
 	/* initialize_data.c */
 int			init(t_map_data **_data, char *av);
 	/* set_data_map.c */
-int			read_map_file(t_map_data *_data, const char *path);
+int			read_map_file(t_map_data *_data, const char *map_path);
 int			put_map_data(char *str, t_map_data *_data);
 char		*check_identifier(char *str, int *value_start_index);
 	/* set_data_map_utils.c */
@@ -53,8 +53,7 @@ int			check_data_is_full(t_map_data *_data);
 	/* validate_map_data.c */
 int			check_map_data_vaildation(t_map_data *_data, int fd);
 	/* validate_map_data_utils.c */
-int			check_all_neighbor(t_map_data *_data);
-int			is_boundary_wall(char *map_line, int index, int max_line);
+int			check_map(t_map_data *_data);
 	/* parsing_utils.c */
 int			ft_my_strstr(char *str1, char *str2);
 int			check_rgb(int rgb);

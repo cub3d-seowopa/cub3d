@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:56:52 by seowoo            #+#    #+#             */
-/*   Updated: 2023/02/27 17:41:29 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:30:51 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,51 @@ int	check_all_neighbor(t_map_data *_data)
 			}
 		}
 	}
+	return (1);
+}
+
+int	check_map_elements(t_map_data *_data)
+{
+	int		i;
+	int		j;
+	int		count_player;
+	char	tmp;
+
+	i = -1;
+	count_player = 0;
+	while (_data->map[++i])
+	{
+		j = -1;
+		while (_data->map[i][++j])
+		{
+			tmp = _data->map[i][j];
+			if (tmp != '0' && tmp != ' ' && tmp != '1' && tmp != 'N' \
+				&& tmp != 'S' && tmp != 'E' && tmp != 'W')
+				return (print_error_msg("Some wrong elements in the map", 0));
+			if (tmp == 'N' || tmp == 'S' || tmp == 'E' || tmp == 'W')
+				++count_player;
+			if (count_player >= 2)
+				return (print_error_msg("Player should be unique", 0));
+		}
+	}
+	if (count_player == 0)
+		return (print_error_msg("There is no player in the map", 0));
+	return (1);
+}
+
+int	check_map(t_map_data *_data)
+{
+	int	i;
+
+	if (_data->num_of_map_line <= 1)
+		return (print_error_msg("Only one line in the map", 0));
+	else if (!check_map_elements(_data))
+		return (0);
+	i = -1;
+	while (_data->map[++i])
+		if (!is_boundary_wall(_data->map[i], i, _data->num_of_map_line))
+			return (0);
+	if (!check_all_neighbor(_data))
+		return (0);
 	return (1);
 }

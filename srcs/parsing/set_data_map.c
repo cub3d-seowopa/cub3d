@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 16:44:16 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 18:37:19 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/02/27 19:06:07 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int	put_map_data(char *str, t_map_data *_data)
 	return (free_strings(str, identifier, ret_code));
 }
 
-int	read_map_file(t_map_data *_data, const char *path)
+int	read_map_file(t_map_data *_data, const char *map_path)
 {
 	int		fd;
 	char	*tmp_buf;
 
-	fd = open(path, O_RDONLY);
+	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return (print_error_msg("Failed to Read File", 0));
 	tmp_buf = get_next_line(fd);
