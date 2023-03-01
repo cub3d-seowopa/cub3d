@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:49:23 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/01 17:58:00 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ void	calc_third(t_info *in, t_calc *c_in, int x)
 	{
 		c_in->texy = (int)c_in->texpos & (texHeight - 1);
 		c_in->texpos += c_in->step;
-		// test code
-		if (c_in->texnum >= 8 || c_in->texy * texHeight + c_in->texx >= texHeight * texWidth)
-			printf("LOG : %d\t%d\n", c_in->texnum, c_in->texy * texHeight + c_in->texx);
 		c_in->color = \
 			in->texture[c_in->texnum][texHeight * c_in->texy + c_in->texx];
 		if (c_in->side == 1)

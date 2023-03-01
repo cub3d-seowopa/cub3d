@@ -43,12 +43,12 @@ $(NAME) : $(LIB) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) -framework OpenGL -framework Appkit
 
 clean :
-	# make clean -C $(MLX_DIR) #
-	# make clean -C $(LIBFT_DIR) #
+	make clean -C $(MLX_DIR)
+	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS)
 
 fclean : clean
-	# make fclean -C $(LIBFT_DIR) #
+	make fclean -C $(LIBFT_DIR)
 	rm -rf $(NAME)
 
 re : fclean all

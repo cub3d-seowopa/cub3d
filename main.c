@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:13:24 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:50:42 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/01 17:58:14 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main_loop(t_info *info)
 
 int	main(void)
 {
-	t_info info;
+	t_info	info;
 
 	copy_worldmap(&info, worldMap);
 	init_info(&info);
