@@ -5,154 +5,136 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 13:33:46 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/02/27 20:46:08 by chanwopa         ###   ########seoul.kr  */
+/*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
+/*   Updated: 2023/03/01 17:49:23 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "stdio.h"
 
-static void	init_buff(t_info *info)
+void	calc_first(t_info *in, t_calc *c_in)
 {
-	int	i;
-	int	j;
-
-	if (info->re_buf == YES)
-	{
-		i = -1;
-		while (++i < HEIGHT)
-		{
-			j = -1;
-			while (++j < WIDTH)
-				info->buf[i][j] = 0;
-		}
-	}
-}
-
-static void	init_rd_mp_dd(t_info *in, t_calc *c_in, int x)
-{
-	/* 벽에 부딪혔는지 여부 */
+	c_in->mapx = (int)in->posx;
+	c_in->mapy = (int)in->posy;
+	c_in->deltadistx = fabs(1 / c_in->raydirx);
+	c_in->deltadisty = fabs(1 / c_in->raydiry);
 	c_in->hit = 0;
-	/* camera_x : for문의 x값이 카메라평면에서 어느 위치에 있는가, x의 범위는 0~WIDTH 이므로 camera_X는 -1 ~ 1 사이값을 가짐 */
-	c_in->camera_x = 2 * x / (double)WIDTH - 1;
-	/* raydir_* : 현재 ray의 방향벡터 성분, 식 = 방향벡터 + 카메라벡터 * 배율 */
-	c_in->raydir_x = in->dir_x + in->plane_x * c_in->camera_x;
-	c_in->raydir_y = in->dir_y + in->plane_y * c_in->camera_x;
-	/* map_* : 현재 ray위치, 시작은 player 위치의 정수형 */
-	c_in->map_x = (int)in->pos_x;
-	c_in->map_y = (int)in->pos_y;
-	/* deltadist_* : x/y면에서 다음 면까지의 광선의 이동거리. deltadistX만큼 빛이 이동했다면 map_x는 1 이동한 것 */
-	c_in->deltadist_x = fabs(1 / c_in->raydir_x);
-	c_in->deltadist_y = fabs(1 / c_in->raydir_y);
-}
-
-static void	init_step_sd(t_info *in, t_calc *c_in)
-{
-	if (c_in->raydir_x < 0)
+	if (c_in->raydirx < 0)
 	{
-		c_in->step_x = -1;
-		c_in->sidedist_x = (in->pos_x - c_in->map_x) * c_in->deltadist_x;
+		c_in->stepx = -1;
+		c_in->sidedistx = (in->posx - c_in->mapx) * c_in->deltadistx;
 	}
 	else
 	{
-		c_in->step_x = 1;
-		c_in->sidedist_x = (c_in->map_x + 1.0 - in->pos_x) * c_in->deltadist_x;
+		c_in->stepx = 1;
+		c_in->sidedistx = (c_in->mapx + 1.0 - in->posx) * c_in->deltadistx;
 	}
-	if (c_in->raydir_y < 0)
+	if (c_in->raydiry < 0)
 	{
-		c_in->step_y = -1;
-		c_in->sidedist_y = (in->pos_y - c_in->map_y) * c_in->deltadist_y;
+		c_in->stepy = -1;
+		c_in->sidedisty = (in->posy - c_in->mapy) * c_in->deltadisty;
 	}
 	else
 	{
-		c_in->step_y = 1;
-		c_in->sidedist_y = (c_in->map_y + 1.0 - in->pos_y) * c_in->deltadist_y;
+		c_in->stepy = 1;
+		c_in->sidedisty = (c_in->mapy + 1.0 - in->posy) * c_in->deltadisty;
 	}
 }
 
-static void	hit_wall_by_ray(t_info *in, t_calc *c_in, int worldMap[MAPWIDTH][MAPHEIGHT])
+void	move_ray_until_hit(t_info *in, t_calc *c_in)
 {
-	while (c_in->hit == NO)
+	while (c_in->hit == 0)
 	{
-		if (c_in->sidedist_x < c_in->sidedist_y)
+		if (c_in->sidedistx < c_in->sidedisty)
 		{
-			c_in->sidedist_x += c_in->deltadist_x;
-			c_in->map_x += c_in->step_x;
-			c_in->side = HIT_WALLX;
+			c_in->sidedistx += c_in->deltadistx;
+			c_in->mapx += c_in->stepx;
+			c_in->side = 0;
 		}
 		else
 		{
-			c_in->sidedist_y += c_in->deltadist_y;
-			c_in->map_y += c_in->step_y;
-			c_in->side = HIT_WALLY;
+			c_in->sidedisty += c_in->deltadisty;
+			c_in->mapy += c_in->stepy;
+			c_in->side = 1;
 		}
-		if (worldMap[c_in->map_x][c_in->map_y] > 0)
-			c_in->hit = YES;
+		if (in->world_map[c_in->mapx][c_in->mapy] > 0)
+			c_in->hit = 1;
 	}
-	if (c_in->side == HIT_WALLX)
-		c_in->perpwalldist = (c_in->map_x - in->pos_x + (1 - c_in->step_x) / 2) \
-								/ c_in->raydir_x;
-	else
-		c_in->perpwalldist = (c_in->map_y - in->pos_y + (1 - c_in->step_y) / 2) \
-								/ c_in->raydir_y;
 }
 
-static void	init_draw_tex(t_info *in, t_calc *c_in, int worldMap[MAPWIDTH][MAPHEIGHT])
+void	calc_second(t_info *in, t_calc *c_in)
 {
-	c_in->line_height = (int)(HEIGHT / c_in->perpwalldist);
-	c_in->draw_start = HEIGHT / 2 - c_in->line_height / 2;
-	if (c_in->draw_start < 0)
-		c_in->draw_start = 0;
-	c_in->draw_end = HEIGHT / 2 + c_in->line_height / 2;
-	if (c_in->draw_end >= HEIGHT)
-		c_in->draw_end = HEIGHT - 1;
-	c_in->tex_num = worldMap[c_in->map_x][c_in->map_y];
-	if (c_in->side == HIT_WALLX)
-		c_in->wall_x = in->pos_y + c_in->perpwalldist * c_in->raydir_y;
+	if (c_in->side == 0)
+		c_in->perpwalldist = \
+			(c_in->mapx - in->posx + (1 - c_in->stepx) / 2) / c_in->raydirx;
 	else
-		c_in->wall_x = in->pos_x + c_in->perpwalldist * c_in->raydir_x;
-	c_in->wall_x -= floor(c_in->wall_x);
-	c_in->tex_x = (int)(c_in->wall_x * (double)TEXWIDTH);
-	if (c_in->side == HIT_WALLX && c_in->raydir_x > 0)
-		c_in->tex_x = TEXWIDTH - c_in->tex_x - 1;
-	if (c_in->side == HIT_WALLY && c_in->raydir_y < 0)
-		c_in->tex_x = TEXWIDTH - c_in->tex_x - 1;
+		c_in->perpwalldist = \
+			(c_in->mapy - in->posy + (1 - c_in->stepy) / 2) / c_in->raydiry;
+	c_in->lineheight = (int)(height / c_in->perpwalldist);
+	c_in->drawstart = -c_in->lineheight / 2 + height / 2;
+	if (c_in->drawstart < 0)
+		c_in->drawstart = 0;
+	c_in->drawend = c_in->lineheight / 2 + height / 2;
+	if (c_in->drawend >= height)
+		c_in->drawend = height - 1;
+	c_in->texnum = in->world_map[c_in->mapx][c_in->mapy];
+	if (c_in->side == 0)
+		c_in->wallx = in->posy + c_in->perpwalldist * c_in->raydiry;
+	else
+		c_in->wallx = in->posx + c_in->perpwalldist * c_in->raydirx;
+	c_in->wallx -= floor(c_in->wallx);
 }
 
-static void	draw_pixel(t_info *in, t_calc *c_in, int x)
+void	calc_third(t_info *in, t_calc *c_in, int x)
 {
 	int	y;
 
-	c_in->step = 1.0 * TEXHEIGHT / c_in->line_height;
-	c_in->tex_pos = (c_in->draw_start - HEIGHT / 2 + c_in->line_height / 2) \
-						* c_in->step;
-	y = c_in->draw_start - 1;
-	while (++y < c_in->draw_end)
+	c_in->texx = (int)(c_in->wallx * (double)texWidth);
+	if (c_in->side == 0 && c_in->raydirx > 0)
+		c_in->texx = texWidth - c_in->texx - 1;
+	if (c_in->side == 1 && c_in->raydiry < 0)
+		c_in->texx = texWidth - c_in->texx - 1;
+	c_in->step = 1.0 * texHeight / c_in->lineheight;
+	c_in->texpos = (c_in->drawstart - height / 2 \
+					+ c_in->lineheight / 2) * c_in->step;
+	y = c_in->drawstart - 1;
+	while (++y < c_in->drawend)
 	{
-		c_in->tex_y = (int)c_in->tex_pos & (TEXHEIGHT - 1);
-		c_in->tex_pos += c_in->step;
-		c_in->color = in->texture[c_in->tex_num] \
-						[TEXHEIGHT * c_in->tex_y + c_in->tex_x];
-		if (c_in->side == HIT_WALLY)
+		c_in->texy = (int)c_in->texpos & (texHeight - 1);
+		c_in->texpos += c_in->step;
+		// test code
+		if (c_in->texnum >= 8 || c_in->texy * texHeight + c_in->texx >= texHeight * texWidth)
+			printf("LOG : %d\t%d\n", c_in->texnum, c_in->texy * texHeight + c_in->texx);
+		c_in->color = \
+			in->texture[c_in->texnum][texHeight * c_in->texy + c_in->texx];
+		if (c_in->side == 1)
 			c_in->color = (c_in->color >> 1) & 8355711;
 		in->buf[y][x] = c_in->color;
-		in->re_buf = YES;
+		in->re_buf = 1;
 	}
 }
 
-void	calc(t_info *info, int worldMap[MAPWIDTH][MAPHEIGHT])
+void	calc(t_info *info)
 {
 	int		x;
 	t_calc	c_info;
 
-	init_buff(info);
-	x = -1;
-	while (++x < WIDTH)
+	if (info->re_buf == 1)
 	{
-		init_rd_mp_dd(info, &c_info, x);
-		init_step_sd(info, &c_info);
-		hit_wall_by_ray(info, &c_info, worldMap);
-		init_draw_tex(info, &c_info, worldMap);
-		draw_pixel(info, &c_info, x);
+		x = -1;
+		while (++x < height)
+			ft_memset(info->buf[x], 0, sizeof(int) * width);
+	}
+	x = -1;
+	while (++x < width)
+	{
+		c_info.camerax = 2 * x / (double)width - 1;
+		c_info.raydirx = info->dirx + info->planex * c_info.camerax;
+		c_info.raydiry = info->diry + info->planey * c_info.camerax;
+		calc_first(info, &c_info);
+		move_ray_until_hit(info, &c_info);
+		calc_second(info, &c_info);
+		calc_third(info, &c_info, x);
 	}
 }

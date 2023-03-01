@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 20:55:22 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/02/27 20:58:07 by chanwopa         ###   ########seoul.kr  */
+/*   Created: 2023/02/28 20:36:20 by chanwopa          #+#    #+#             */
+/*   Updated: 2023/03/01 17:54:55 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw(t_info *info)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < height)
+	{
+		x = -1;
+		while (++x < width)
+			info->img.data[y * width + x] = info->buf[y][x];
+	}
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
+}
 
 void	load_image(t_info *info, int *texture, char *path, t_img *img)
 {
@@ -18,9 +33,9 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
 	int	y;
 
 	img->img = mlx_xpm_file_to_image(info->mlx, path, \
-									&img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, \
-									&img->size_l, &img->endian);
+								&img->img_width, &img->img_height);
+	img->data = (int *)mlx_get_data_addr(img->img, \
+								&img->bpp, &img->size_l, &img->endian);
 	y = -1;
 	while (++y < img->img_height)
 	{

@@ -23,9 +23,10 @@ MLX_LIB		=	mlx/libmlx.a
 LIB			=	$(MLX_LIB) $(LIBFT_LIB)
 
 SRCS		=	main.c \
-				calc.c \
-				key_press.c \
-				texture.c
+				init.c \
+				render.c \
+				key.c \
+				calc.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -42,12 +43,12 @@ $(NAME) : $(LIB) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) -framework OpenGL -framework Appkit
 
 clean :
-	make clean -C $(MLX_DIR)
-	make clean -C $(LIBFT_DIR)
+	# make clean -C $(MLX_DIR) #
+	# make clean -C $(LIBFT_DIR) #
 	rm -rf $(OBJS)
 
 fclean : clean
-	make fclean -C $(LIBFT_DIR)
+	# make fclean -C $(LIBFT_DIR) #
 	rm -rf $(NAME)
 
 re : fclean all
