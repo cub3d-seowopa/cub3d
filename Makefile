@@ -6,7 +6,7 @@
 #    By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 12:03:27 by seowokim          #+#    #+#              #
-#    Updated: 2023/02/27 16:45:18 by seowokim         ###   ########seoul.kr   #
+#    Updated: 2023/03/02 16:43:42 by seowokim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS_DIR = ./srcs
 ERROR_DIR = error
 GNL_DIR = gnl
 PARSING_DIR = parsing
+EXECUTE_DIR = execute
 
 HEADER_DIR = ./includes/
 OBJS_DIR = ./objs
@@ -29,8 +30,9 @@ SRCS = \
 main.c \
 free_memory.c \
 $(ERROR_DIR)/error_handling.c \
-gnl/get_next_line.c gnl/get_next_line_utils.c \
+$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
 $(PARSING_DIR)/initialize_data.c $(PARSING_DIR)/set_data_map.c $(PARSING_DIR)/set_data_map_utils.c $(PARSING_DIR)/parsing_utils.c $(PARSING_DIR)/validate_map_data.c $(PARSING_DIR)/validate_map_data_utils.c \
+$(EXECUTE_DIR)/initialize_info.c $(EXECUTE_DIR)/calc.c $(EXECUTE_DIR)/key.c $(EXECUTE_DIR)/render.c \
 
 OBJ = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
@@ -57,7 +59,7 @@ $(NAME) : $(OBJS)
 
 $(OBJS_DIR)/%.o : %.c
 	@mkdir -p $(OBJS_DIR)
-	@mkdir -p $(OBJS_DIR)/$(ERROR_DIR) $(OBJS_DIR)/$(GNL_DIR) $(OBJS_DIR)/$(PARSING_DIR)
+	@mkdir -p $(OBJS_DIR)/$(ERROR_DIR) $(OBJS_DIR)/$(GNL_DIR) $(OBJS_DIR)/$(PARSING_DIR) $(OBJS_DIR)/$(EXECUTE_DIR)
 	@$(CC) $(CFLAGS) -I $(HEADER_DIR) -I $(LIBFT_DIR)/ -I $(MLX_DIR)/ -c $< -o $@
 
 clean :

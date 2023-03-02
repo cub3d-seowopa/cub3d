@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 19:43:42 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 16:54:34 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 # include "mlx.h"
 # include "mlx_info.h"
 # include "map_data.h"
-
-# define RED "\33[31m"
-# define WHITE "\33[37m"
-# define BUFFER_SIZE 5
+# include "key_macos.h"
+# include "my_define.h"
 
 	/*    get_next_line   */
 char		*get_next_line(int fd);
@@ -33,13 +31,13 @@ char		*memory_set(int index, int ckt);
 
 int			print_error_msg(char *message, int _errno);
 void		free_all_memory(t_mlx_info *_info, t_map_data *_data);
-
+int			free_map_data(t_map_data *_data);
 
 /************************************************/
 /*					parsing						*/
 /************************************************/
 	/* initialize_data.c */
-int			init(t_map_data **_data, char *av);
+int			init_map_data(t_map_data **_data, char *av);
 	/* set_data_map.c */
 int			read_map_file(t_map_data *_data, const char *map_path);
 	/* set_data_map_utils.c */
@@ -60,4 +58,19 @@ int			free_strings(char *str1, char *str2, int return_value);
 int			ft_free_double_string(char **str, int ret);
 void		print_map_data(t_map_data *_data);
 
+/************************************************/
+/*					execute						*/
+/************************************************/
+	/* initailize_info.c */
+void		init_mlx_info(t_mlx_info *info, t_map_data *data);
+	/* calc.c */
+void		calc(t_mlx_info *info);
+	/* key.c */
+int			key_press(int key, t_mlx_info *info);
+int			key_release(int key, t_mlx_info *info);
+int			key_update(t_mlx_info *info);
+	/* render.c */
+void		load_texture(t_mlx_info *info);
+void		load_image(t_mlx_info *info, int *texture, char *path, t_img *img);
+void		draw(t_mlx_info *info);
 #endif /* CUB3D_H */

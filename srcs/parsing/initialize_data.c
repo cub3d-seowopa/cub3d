@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:43:48 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 21:13:29 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 14:38:22 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	map_elements_init(t_map_data *_data)
 // 	return (_info);
 // }
 
-static t_map_data	*map_data_init(t_map_data *_data)
+static t_map_data	*allocate_map_data(t_map_data *_data)
 {
 	_data = (t_map_data *)malloc(sizeof(t_map_data));
 	if (!_data)
@@ -51,13 +51,13 @@ static t_map_data	*map_data_init(t_map_data *_data)
 	return (_data);
 }
 
-int	init(t_map_data **_data, char *av)
+int	init_map_data(t_map_data **_data, char *av)
 {
 	if (!ft_my_strstr(av, ".cub\0"))
-		return (print_error_msg("Check map file\'s name", 0));
+		return (print_error_msg("Check map file\'s type", 0));
 	// *_info = mlx_info_init(*_info);
-	*_data = map_data_init(*_data);
-	if (!_data)
+	*_data = allocate_map_data(*_data);
+	if (!*_data)
 		return (print_error_msg("Failed to allocate memory", 0));
 	map_elements_init(*_data);
 	return (1);
