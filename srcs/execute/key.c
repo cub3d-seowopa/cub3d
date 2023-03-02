@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:39:59 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/02 18:57:19 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 20:53:12 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,27 @@ static void	updown(t_mlx_info *info, int sign)
 		info->posy += info->diry * info->movespeed * sign;
 }
 
+static void	leftright(t_mlx_info *info, int sign)
+{
+	if (!info->world_map[(int)(info->posx + info->planex * \
+		info->movespeed * sign)][(int)(info->posy)])
+		info->posx += info->planex * info->movespeed * sign;
+	if (!info->world_map[(int)(info->posx)][(int)(info->posy \
+			+ info->planey * info->movespeed * sign)])
+		info->posy += info->planey * info->movespeed * sign;
+}
+
 static void	rotate(t_mlx_info *info, int sign)
 {
 	double	olddir_x;
 	double	oldplane_x;
 
 	olddir_x = info->dirx;
+	oldplane_x = info->planex;
 	info->dirx = info->dirx * cos(info->rotspeed * sign) - \
 				info->diry * sin(info->rotspeed * sign);
 	info->diry = olddir_x * sin(info->rotspeed * sign) + \
 				info->diry * cos(info->rotspeed * sign);
-	oldplane_x = info->planex;
 	info->planex = info->planex * cos(info->rotspeed * sign) - \
 					info->planey * sin(info->rotspeed * sign);
 	info->planey = oldplane_x * sin(info->rotspeed * sign) + \
@@ -45,10 +55,14 @@ int	key_update(t_mlx_info *info)
 		updown(info, 1);
 	if (info->key.key_s == 1)
 		updown(info, -1);
+	if (info->key.key_a == 1)
+		leftright(info, -1);
+	if (info->key.key_d == 1)
+		leftright(info, 1);
 	if (info->key.key_left_arrow == 1)
-		rotate(info, -1);
-	if (info->key.key_right_arrow == 1)
 		rotate(info, 1);
+	if (info->key.key_right_arrow == 1)
+		rotate(info, -1);
 	return (0);
 }
 

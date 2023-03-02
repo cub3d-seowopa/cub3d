@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_info.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:44:12 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 19:58:41 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 21:22:22 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_malloc(t_mlx_info *info)
+void	init_malloc(t_mlx_info *info, t_map_data *data)
 {
 	int	i;
 
@@ -20,16 +20,16 @@ void	init_malloc(t_mlx_info *info)
 	while (++i < WINDOW_HEIGHT)
 		ft_memset(info->buf[i], 0, sizeof(int) * WINDOW_WIDTH);
 	i = -1;
-	while (++i < 8)
+	while (++i < 4)
 	{
 		info->texture[i] = malloc(sizeof(int) * (TEXHEIGHT * TEXWIDTH));
 		if (!info->texture[i])
 			exit(1);
 	}
 	i = -1;
-	while (++i < 8)
+	while (++i < 4)
 		ft_memset(info->texture[i], 0, sizeof(int) * TEXHEIGHT * TEXWIDTH);
-	load_texture(info);
+	load_texture(info, data);
 }
 
 static int	convert_map_data(char data_map_elements)
@@ -76,21 +76,29 @@ static void	player_start_position(t_mlx_info *info, t_map_data *data)
 	{
 		info->dirx = -1.0;
 		info->diry = 0.0;
+		info->planex = 0;
+		info->planey = 0.66;
 	}
 	else if (data->player_face == 'S')
 	{
 		info->dirx = 1.0;
 		info->diry = 0.0;
+		info->planex = 0;
+		info->planey = -0.66;
 	}
 	else if (data->player_face == 'W')
 	{
-		info->dirx = -1.0;
-		info->diry = 0.0;
+		info->dirx = 0.0;
+		info->diry = -1.0;
+		info->planex = -0.66;
+		info->planey = 0;
 	}
 	else if (data->player_face == 'E')
 	{
-		info->dirx = 1.0;
-		info->diry = 0.0;
+		info->dirx = 0.0;
+		info->diry = 1.0;
+		info->planex = 0.66;
+		info->planey = 0;
 	}
 }
 
@@ -98,8 +106,6 @@ void	init_mlx_info(t_mlx_info *info, t_map_data *data)
 {
 	info->mlx = mlx_init();
 	player_start_position(info, data);
-	info->planex = 0.0;
-	info->planey = 0.66;
 	info->re_buf = 0;
 	info->movespeed = 0.05;
 	info->rotspeed = 0.05;

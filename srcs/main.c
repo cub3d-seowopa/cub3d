@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:30 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 18:28:48 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 20:56:17 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char *argv[])
 		return (free_map_data(map_data));
 	copy_data_to_info(&mlx_info, map_data);
 	init_mlx_info(&mlx_info, map_data);
-	init_malloc(&mlx_info);
+	init_malloc(&mlx_info, map_data);
 	free_map_data(map_data);
 	mlx_loop_hook(mlx_info.mlx, &main_loop, &mlx_info);
 	mlx_hook(mlx_info.win, X_EVENT_KEY_PRESS, 0, &key_press, &mlx_info);

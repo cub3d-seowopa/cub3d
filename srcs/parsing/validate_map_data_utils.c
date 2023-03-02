@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_data_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:56:52 by seowoo            #+#    #+#             */
-/*   Updated: 2023/03/02 18:21:25 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 21:14:02 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

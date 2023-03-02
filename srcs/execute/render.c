@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:36:20 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/02 19:54:28 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 21:07:46 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,12 @@ void	load_image(t_mlx_info *info, int *texture, char *path, t_img *img)
 	mlx_destroy_image(info->mlx, img->img);
 }
 
-void	load_texture(t_mlx_info *info)
+void	load_texture(t_mlx_info *info, t_map_data *data)
 {
 	t_img	img;
 
-	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
-	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
-	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
-	load_image(info, info->texture[3], "textures/greystone.xpm", &img);
-	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);
-	load_image(info, info->texture[5], "textures/mossy.xpm", &img);
-	load_image(info, info->texture[6], "textures/wood.xpm", &img);
-	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
+	load_image(info, info->texture[0], data->east_tex_path, &img);
+	load_image(info, info->texture[1], data->west_tex_path, &img);
+	load_image(info, info->texture[2], data->south_tex_path, &img);
+	load_image(info, info->texture[3], data->north_tex_path, &img);
 }

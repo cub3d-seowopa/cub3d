@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 18:25:26 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 20:59:38 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		print_map_data(t_map_data *_data);
 	/* initailize_info.c */
 void		init_mlx_info(t_mlx_info *info, t_map_data *data);
 void		copy_data_to_info(t_mlx_info *_info, t_map_data *_data);
-void		init_malloc(t_mlx_info *info);
+void		init_malloc(t_mlx_info *info, t_map_data *data);
 	/* calc.c */
 void		calc(t_mlx_info *info);
 	/* key.c */
@@ -76,7 +76,7 @@ int			key_press(int key, t_mlx_info *info);
 int			key_release(int key, t_mlx_info *info);
 int			key_update(t_mlx_info *info);
 	/* render.c */
-void		load_texture(t_mlx_info *info);
+void		load_texture(t_mlx_info *info, t_map_data *data);
 void		load_image(t_mlx_info *info, int *texture, char *path, t_img *img);
 void		draw(t_mlx_info *info);
 
