@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:58:00 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 16:03:14 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,17 @@ void	calc_second(t_info *in, t_calc *c_in)
 	c_in->drawend = c_in->lineheight / 2 + height / 2;
 	if (c_in->drawend >= height)
 		c_in->drawend = height - 1;
-	c_in->texnum = in->world_map[c_in->mapx][c_in->mapy];
+
+	// set texture number. modified based on wall direction */
+	if (c_in->side == 0 && c_in->raydirx > 0)
+		c_in->texnum = 1;
+	else if (c_in->side == 0 && c_in->raydirx < 0)
+		c_in->texnum = 2;
+	if (c_in->side == 1 && c_in->raydiry > 0)
+		c_in->texnum = 3;
+	else if (c_in->side == 1 && c_in->raydiry < 0)
+		c_in->texnum = 4;
+
 	if (c_in->side == 0)
 		c_in->wallx = in->posy + c_in->perpwalldist * c_in->raydiry;
 	else
@@ -91,22 +101,23 @@ void	calc_third(t_info *in, t_calc *c_in, int x)
 	int	y;
 
 	c_in->texx = (int)(c_in->wallx * (double)texWidth);
+	/* 텍스쳐 대칭 보정 */
 	if (c_in->side == 0 && c_in->raydirx > 0)
 		c_in->texx = texWidth - c_in->texx - 1;
 	if (c_in->side == 1 && c_in->raydiry < 0)
 		c_in->texx = texWidth - c_in->texx - 1;
+
 	c_in->step = 1.0 * texHeight / c_in->lineheight;
 	c_in->texpos = (c_in->drawstart - height / 2 \
 					+ c_in->lineheight / 2) * c_in->step;
 	y = c_in->drawstart - 1;
 	while (++y < c_in->drawend)
 	{
+		/* 유일하게 이해 안가는 부분. 오버플로우 방지? */
 		c_in->texy = (int)c_in->texpos & (texHeight - 1);
 		c_in->texpos += c_in->step;
 		c_in->color = \
 			in->texture[c_in->texnum][texHeight * c_in->texy + c_in->texx];
-		if (c_in->side == 1)
-			c_in->color = (c_in->color >> 1) & 8355711;
 		in->buf[y][x] = c_in->color;
 		in->re_buf = 1;
 	}

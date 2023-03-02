@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:16:47 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:52:08 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/01 20:19:05 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void	init_info(t_info *info)
 	info->texture = malloc(sizeof(int *) * 8);
 	if (!info->texture)
 		exit(1);
+	info->key.key_w = 0;
+	info->key.key_a = 0;
+	info->key.key_s = 0;
+	info->key.key_d = 0;
 }
 
 void	init_malloc(t_info *info)

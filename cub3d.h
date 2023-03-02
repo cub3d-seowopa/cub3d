@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:12:19 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:39:30 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/01 20:16:54 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 
 # define X_EVENT_KEY_PRESS	2
-# define X_EVENT_KEY_EXIT	17
+# define X_EVENT_KEY_RELEASE	3
 # define texWidth 64
 # define texHeight 64
 # define mapWidth 24
@@ -41,6 +41,15 @@ typedef struct s_img
 	int		img_height;
 }				t_img;
 
+typedef struct s_key
+{
+	int		key_w;
+	int		key_a;
+	int		key_s;
+	int		key_d;
+}				t_key;
+
+
 typedef struct s_info
 {
 	double	posx;
@@ -58,6 +67,7 @@ typedef struct s_info
 	double	rotspeed;
 	int		re_buf;
 	int		**world_map;
+	t_key	key;
 }				t_info;
 
 typedef struct s_calc
@@ -102,7 +112,9 @@ void		load_image(t_info *info, int *texture, char *path, t_img *img);
 void		draw(t_info *info);
 
 /* key.c */
+int			key_update(t_info *info);
 int			key_press(int key, t_info *info);
+int			key_release(int key, t_info *info);
 
 /* calc.c */
 void		calc(t_info *info);

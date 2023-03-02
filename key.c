@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:39:59 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:36:35 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/01 20:20:07 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,45 @@ static void	rotate(t_info *info, int sign)
 					info->planey * cos(info->rotspeed * sign);
 }
 
+int	key_update(t_info *info)
+{
+	if (info->key.key_w == 1)
+		updown(info, 1);
+	if (info->key.key_s == 1)
+		updown(info, -1);
+	if (info->key.key_a == 1)
+		rotate(info, 1);
+	if (info->key.key_d == 1)
+		rotate(info, -1);
+	return (0);
+}
+
 int	key_press(int key, t_info *info)
 {
-	if (key == K_W)
-		updown(info, 1);
-	else if (key == K_S)
-		updown(info, -1);
-	else if (key == K_D)
-		rotate(info, -1);
-	else if (key == K_A)
-		rotate(info, 1);
-	else if (key == K_ESC)
+	if (key == K_ESC)
 		exit(0);
-	mlx_clear_window(info->mlx, info->win);
-	main_loop(info);
+	else if (key == K_W)
+		info->key.key_w = 1;
+	else if (key == K_A)
+		info->key.key_a = 1;
+	else if (key == K_S)
+		info->key.key_s = 1;
+	else if (key == K_D)
+		info->key.key_d = 1;
+	return (0);
+}
+
+int	key_release(int key, t_info *info)
+{
+	if (key == K_ESC)
+		exit(0);
+	else if (key == K_W)
+		info->key.key_w = 0;
+	else if (key == K_A)
+		info->key.key_a = 0;
+	else if (key == K_S)
+		info->key.key_s = 0;
+	else if (key == K_D)
+		info->key.key_d = 0;
 	return (0);
 }

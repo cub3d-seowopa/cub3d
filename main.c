@@ -6,7 +6,7 @@
 /*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:13:24 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/01 17:58:14 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/01 20:17:41 by chanwopa         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main_loop(t_info *info)
 {
 	calc(info);
 	draw(info);
+	key_update(info);
 	return (0);
 }
 
@@ -55,6 +56,8 @@ int	main(void)
 	init_info(&info);
 	init_malloc(&info);
 	mlx_loop_hook(info.mlx, &main_loop, &info);
+
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_hook(info.win, X_EVENT_KEY_RELEASE, 0, &key_release, &info);
 	mlx_loop(info.mlx);
 }
