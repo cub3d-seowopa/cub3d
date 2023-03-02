@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:44:12 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 17:04:46 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 18:58:18 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,36 @@ void	copy_data_to_info(t_mlx_info *_info, t_map_data *_data)
 	_info->world_map[row] = NULL;
 }
 
+static void	player_start_position(t_mlx_info *info, t_map_data *data)
+{
+	info->posx = data->pos_x;
+	info->posy = data->pos_y;
+	if (data->player_face == 'N')
+	{
+		info->dirx = 1.0;
+		info->diry = 0.0;
+	}
+	else if (data->player_face == 'S')
+	{
+		info->dirx = -1.0;
+		info->diry = 0.0;
+	}
+	else if (data->player_face == 'W')
+	{
+		info->dirx = 0.0;
+		info->diry = 1.0;
+	}
+	else if (data->player_face == 'E')
+	{
+		info->dirx = 0.0;
+		info->diry = -1.0;
+	}
+}
+
 void	init_mlx_info(t_mlx_info *info, t_map_data *data)
 {
 	info->mlx = mlx_init();
-	info->posx = 22.0;
-	info->posy = 11.5;
-	info->dirx = -1.0;
-	info->diry = 0.0;
+	player_start_position(info, data);
 	info->planex = 0.0;
 	info->planey = 0.66;
 	info->re_buf = 0;
@@ -93,6 +116,4 @@ void	init_mlx_info(t_mlx_info *info, t_map_data *data)
 	info->key.key_d = 0;
 	info->key.key_left_arrow = 0;
 	info->key.key_right_arrow = 0;
-	copy_data_to_info(info, data);
-	init_malloc(info);
 }

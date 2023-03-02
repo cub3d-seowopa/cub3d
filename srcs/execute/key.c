@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:39:59 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/02 17:01:50 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 18:57:19 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	key_update(t_mlx_info *info)
 	if (info->key.key_s == 1)
 		updown(info, -1);
 	if (info->key.key_left_arrow == 1)
-		rotate(info, 1);
-	if (info->key.key_right_arrow == 1)
 		rotate(info, -1);
+	if (info->key.key_right_arrow == 1)
+		rotate(info, 1);
 	return (0);
 }
 

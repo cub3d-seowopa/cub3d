@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:03:36 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 21:13:03 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 18:17:33 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct s_map_data{
 	char			**map;
 	int				num_of_data_except_map;
 	int				num_of_map_line;
+	double			pos_x;
+	double			pos_y;
+	char			player_face;
+	int				num_of_player;
 }	t_map_data;
 
 #endif /* MAP_DATA_H */

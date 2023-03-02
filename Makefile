@@ -6,7 +6,7 @@
 #    By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 12:03:27 by seowokim          #+#    #+#              #
-#    Updated: 2023/03/02 16:43:42 by seowokim         ###   ########seoul.kr   #
+#    Updated: 2023/03/02 17:42:53 by seowokim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ main.c \
 free_memory.c \
 $(ERROR_DIR)/error_handling.c \
 $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
-$(PARSING_DIR)/initialize_data.c $(PARSING_DIR)/set_data_map.c $(PARSING_DIR)/set_data_map_utils.c $(PARSING_DIR)/parsing_utils.c $(PARSING_DIR)/validate_map_data.c $(PARSING_DIR)/validate_map_data_utils.c \
+$(PARSING_DIR)/initialize_data.c $(PARSING_DIR)/set_data_map.c $(PARSING_DIR)/set_data_map_utils.c $(PARSING_DIR)/set_data_map_utils2.c $(PARSING_DIR)/parsing_utils.c $(PARSING_DIR)/validate_map_data.c $(PARSING_DIR)/validate_map_data_utils.c \
 $(EXECUTE_DIR)/initialize_info.c $(EXECUTE_DIR)/calc.c $(EXECUTE_DIR)/key.c $(EXECUTE_DIR)/render.c \
 
 OBJ = $(SRCS:.c=.o)

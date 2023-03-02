@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:56:52 by seowoo            #+#    #+#             */
-/*   Updated: 2023/02/27 19:38:26 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 18:21:25 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ static int	check_map_elements(t_map_data *_data)
 {
 	int		i;
 	int		j;
-	int		count_player;
 	char	tmp;
 
 	i = -1;
-	count_player = 0;
 	while (_data->map[++i])
 	{
 		j = -1;
@@ -81,15 +79,15 @@ static int	check_map_elements(t_map_data *_data)
 			tmp = _data->map[i][j];
 			if (tmp != '0' && tmp != ' ' && tmp != '1' && tmp != 'N' \
 				&& tmp != 'S' && tmp != 'E' && tmp != 'W')
-				return (print_error_msg("Some wrong elements in the map", 0));
+				return (print_error_msg("Some wrong elements in the map.", 0));
 			if (tmp == 'N' || tmp == 'S' || tmp == 'E' || tmp == 'W')
-				++count_player;
-			if (count_player >= 2)
-				return (print_error_msg("Player should be unique", 0));
+				put_player_init_status(_data, i, j, tmp);
+			if (_data->num_of_player > 1)
+				return (print_error_msg("More than one player in the map.", 0));
 		}
 	}
-	if (count_player == 0)
-		return (print_error_msg("There is no player in the map", 0));
+	if (_data->num_of_player != 1)
+		return (print_error_msg("No player in the map.", 0));
 	return (1);
 }
 

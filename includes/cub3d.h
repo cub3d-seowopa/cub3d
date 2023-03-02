@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 16:54:34 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 18:25:26 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ char		*get_texture_path(t_map_data *_data, char *str,
 int			get_floor_rgb(t_map_data *_data, char *str, int rgb_start_index);
 int			get_ceiling_rgb(t_map_data	*_data, char *str, int rgb_start_index);
 int			check_data_is_full(t_map_data *_data);
+	/* set_data_map_utils2.c */
+void		put_player_init_status(t_map_data *_data, int _x, int _y, \
+									char face);
+void		make_floor_rgb(t_map_data *_data);
 	/* validate_map_data.c */
 int			check_map_data_vaildation(t_map_data *_data, int fd);
 	/* validate_map_data_utils.c */
@@ -63,6 +67,8 @@ void		print_map_data(t_map_data *_data);
 /************************************************/
 	/* initailize_info.c */
 void		init_mlx_info(t_mlx_info *info, t_map_data *data);
+void		copy_data_to_info(t_mlx_info *_info, t_map_data *_data);
+void		init_malloc(t_mlx_info *info);
 	/* calc.c */
 void		calc(t_mlx_info *info);
 	/* key.c */
@@ -73,4 +79,5 @@ int			key_update(t_mlx_info *info);
 void		load_texture(t_mlx_info *info);
 void		load_image(t_mlx_info *info, int *texture, char *path, t_img *img);
 void		draw(t_mlx_info *info);
+
 #endif /* CUB3D_H */

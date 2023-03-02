@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:43:48 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 14:38:22 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 18:17:55 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	map_elements_init(t_map_data *_data)
 	_data->map = NULL;
 	_data->num_of_data_except_map = 0;
 	_data->num_of_map_line = 0;
+	_data->num_of_player = 0;
 	_data->bool_floor = 0;
 	_data->bool_ceiling = 0;
 	_data->floor_rgb = 0;
