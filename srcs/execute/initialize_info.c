@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:44:12 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 18:58:18 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/02 19:58:41 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	convert_map_data(char data_map_elements)
 		return (-1);
 	else if (data_map_elements == 'N' || data_map_elements == 'S' || \
 			data_map_elements == 'E' || data_map_elements == 'W')
-		return (2);
+		return (0);
 	else
 		return (data_map_elements - '0');
 }
@@ -70,27 +70,27 @@ void	copy_data_to_info(t_mlx_info *_info, t_map_data *_data)
 
 static void	player_start_position(t_mlx_info *info, t_map_data *data)
 {
-	info->posx = data->pos_x;
-	info->posy = data->pos_y;
+	info->posx = data->pos_x + 0.5;
+	info->posy = data->pos_y + 0.5;
 	if (data->player_face == 'N')
-	{
-		info->dirx = 1.0;
-		info->diry = 0.0;
-	}
-	else if (data->player_face == 'S')
 	{
 		info->dirx = -1.0;
 		info->diry = 0.0;
 	}
+	else if (data->player_face == 'S')
+	{
+		info->dirx = 1.0;
+		info->diry = 0.0;
+	}
 	else if (data->player_face == 'W')
 	{
-		info->dirx = 0.0;
-		info->diry = 1.0;
+		info->dirx = -1.0;
+		info->diry = 0.0;
 	}
 	else if (data->player_face == 'E')
 	{
-		info->dirx = 0.0;
-		info->diry = -1.0;
+		info->dirx = 1.0;
+		info->diry = 0.0;
 	}
 }
 
