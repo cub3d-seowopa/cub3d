@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:36:20 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/02 21:07:46 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 13:20:56 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,21 @@ void	load_texture(t_mlx_info *info, t_map_data *data)
 	load_image(info, info->texture[1], data->west_tex_path, &img);
 	load_image(info, info->texture[2], data->south_tex_path, &img);
 	load_image(info, info->texture[3], data->north_tex_path, &img);
+}
+
+void	draw_floor(t_mlx_info *info)
+{
+	int				y;
+	int				x;
+
+	y = -1;
+	while (++y < WINDOW_HEIGHT / 2)
+	{
+		x = -1;
+		while (++x < WINDOW_WIDTH)
+		{
+			info->buf[y][x] = info->floor_rgb;
+			info->buf[WINDOW_HEIGHT - y - 1][x] = info->ceiling_rgb;
+		}
+	}
 }

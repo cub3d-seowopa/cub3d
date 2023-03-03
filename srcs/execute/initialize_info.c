@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_info.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:44:12 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 21:22:22 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 12:33:40 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,12 @@ void	init_malloc(t_mlx_info *info, t_map_data *data)
 	{
 		info->texture[i] = malloc(sizeof(int) * (TEXHEIGHT * TEXWIDTH));
 		if (!info->texture[i])
-			exit(1);
+			exit(free_map_data(data));
 	}
 	i = -1;
 	while (++i < 4)
 		ft_memset(info->texture[i], 0, sizeof(int) * TEXHEIGHT * TEXWIDTH);
 	load_texture(info, data);
-}
-
-static int	convert_map_data(char data_map_elements)
-{
-	if (data_map_elements == ' ')
-		return (-1);
-	else if (data_map_elements == 'N' || data_map_elements == 'S' || \
-			data_map_elements == 'E' || data_map_elements == 'W')
-		return (0);
-	else
-		return (data_map_elements - '0');
 }
 
 void	copy_data_to_info(t_mlx_info *_info, t_map_data *_data)
@@ -68,40 +57,6 @@ void	copy_data_to_info(t_mlx_info *_info, t_map_data *_data)
 	_info->world_map[row] = NULL;
 }
 
-static void	player_start_position(t_mlx_info *info, t_map_data *data)
-{
-	info->posx = data->pos_x + 0.5;
-	info->posy = data->pos_y + 0.5;
-	if (data->player_face == 'N')
-	{
-		info->dirx = -1.0;
-		info->diry = 0.0;
-		info->planex = 0;
-		info->planey = 0.66;
-	}
-	else if (data->player_face == 'S')
-	{
-		info->dirx = 1.0;
-		info->diry = 0.0;
-		info->planex = 0;
-		info->planey = -0.66;
-	}
-	else if (data->player_face == 'W')
-	{
-		info->dirx = 0.0;
-		info->diry = -1.0;
-		info->planex = -0.66;
-		info->planey = 0;
-	}
-	else if (data->player_face == 'E')
-	{
-		info->dirx = 0.0;
-		info->diry = 1.0;
-		info->planex = 0.66;
-		info->planey = 0;
-	}
-}
-
 void	init_mlx_info(t_mlx_info *info, t_map_data *data)
 {
 	info->mlx = mlx_init();
@@ -115,11 +70,13 @@ void	init_mlx_info(t_mlx_info *info, t_map_data *data)
 									&info->img.size_l, &info->img.endian);
 	info->texture = malloc(sizeof(int *) * 8);
 	if (!info->texture)
-		exit(1);
+		exit(free_map_data(data));
 	info->key.key_w = 0;
 	info->key.key_a = 0;
 	info->key.key_s = 0;
 	info->key.key_d = 0;
 	info->key.key_left_arrow = 0;
 	info->key.key_right_arrow = 0;
+	info->floor_rgb = data->floor_rgb;
+	info->ceiling_rgb = data->ceiling_rgb;
 }

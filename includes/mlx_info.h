@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:11:53 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 16:46:27 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 12:46:14 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,26 @@ typedef struct s_key
 	int		key_right_arrow;
 }				t_key;
 
-
 typedef struct s_mlx_info
 {
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	int		buf[WINDOW_HEIGHT][WINDOW_WIDTH];
-	int		**texture;
-	double	movespeed;
-	double	rotspeed;
-	int		re_buf;
-	int		**world_map;
-	t_key	key;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
+	void			*mlx;
+	void			*win;
+	t_img			img;
+	int				buf[WINDOW_HEIGHT][WINDOW_WIDTH];
+	int				**texture;
+	unsigned int	floor_rgb;
+	unsigned int	ceiling_rgb;
+	double			movespeed;
+	double			rotspeed;
+	int				re_buf;
+	int				**world_map;
+	t_key			key;
 }				t_mlx_info;
 
 typedef struct s_calc

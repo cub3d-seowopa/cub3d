@@ -1,13 +1,13 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-EA ./path_to_the_east_texture
-WE ./path_to_the_west_texture
+NO ./textures/purplestone.xpm
+SO ./textures/bluestone.xpm
+EA ./textures/wood.xpm
+WE ./textures/redbrick.xpm
 
 F 220,100,0
 C 225,30,0
 
-111111111
-100S00011
-100000011
-100000011
-111111111
+ 111111
+100W0001
+10000001
+10000001
+ 111111

@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:35:42 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 18:23:53 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 11:51:23 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	put_player_init_status(t_map_data *_data, int _x, int _y, char face)
 
 void	make_floor_rgb(t_map_data *_data)
 {
-	_data->floor_rgb = 0;
-	_data->ceiling_rgb = 0;
 	_data->floor_rgb = (_data->floor_r << 16) | \
 					(_data->floor_g << 8) | \
 					_data->floor_b;

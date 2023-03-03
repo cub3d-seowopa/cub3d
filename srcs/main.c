@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:30 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/02 20:56:17 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 13:21:03 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	leakcheck(void)
 int	close_window(t_mlx_info *info)
 {
 	mlx_destroy_window(info->mlx, info->win);
-	exit(1);
+	exit(0);
 }
 
 int	main_loop(t_mlx_info *info)
 {
+	draw_floor(info);
 	calc(info);
 	draw(info);
 	key_update(info);
@@ -51,6 +52,7 @@ int	main(int argc, char *argv[])
 	mlx_loop_hook(mlx_info.mlx, &main_loop, &mlx_info);
 	mlx_hook(mlx_info.win, X_EVENT_KEY_PRESS, 0, &key_press, &mlx_info);
 	mlx_hook(mlx_info.win, X_EVENT_KEY_RELEASE, 0, &key_release, &mlx_info);
+	mlx_hook(mlx_info.win, 17, 0, &close_window, &mlx_info);
 	mlx_loop(mlx_info.mlx);
 	return (0);
 }

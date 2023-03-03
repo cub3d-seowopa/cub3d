@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chanwopa <chanwopa@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/02 21:18:19 by chanwopa         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 13:07:05 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	calc_second(t_mlx_info *in, t_calc *c_in)
 	c_in->drawend = c_in->lineheight / 2 + WINDOW_HEIGHT / 2;
 	if (c_in->drawend >= WINDOW_HEIGHT)
 		c_in->drawend = WINDOW_HEIGHT - 1;
-
 	// set texture number. modified based on wall direction */
 	if (c_in->side == 0 && c_in->raydirx > 0)
 		c_in->texnum = 2;
@@ -87,7 +86,6 @@ void	calc_second(t_mlx_info *in, t_calc *c_in)
 		c_in->texnum = 1;
 	else if (c_in->side == 1 && c_in->raydiry > 0)
 		c_in->texnum = 0;
-
 	if (c_in->side == 0)
 		c_in->wallx = in->posy + c_in->perpwalldist * c_in->raydiry;
 	else
@@ -105,7 +103,6 @@ void	calc_third(t_mlx_info *in, t_calc *c_in, int x)
 		c_in->texx = TEXWIDTH - c_in->texx - 1;
 	if (c_in->side == 1 && c_in->raydiry < 0)
 		c_in->texx = TEXWIDTH - c_in->texx - 1;
-
 	c_in->step = 1.0 * TEXHEIGHT / c_in->lineheight;
 	c_in->texpos = (c_in->drawstart - WINDOW_HEIGHT / 2 \
 					+ c_in->lineheight / 2) * c_in->step;
