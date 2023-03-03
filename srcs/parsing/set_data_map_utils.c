@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:34 by seowokim          #+#    #+#             */
-/*   Updated: 2023/02/27 19:40:46 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 20:14:25 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,15 @@ char	*get_texture_path(t_map_data *_data, char *str, int path_start_index)
 	len = 0;
 	tmp_index = path_start_index - 1;
 	while (str[++tmp_index])
-		if (str[tmp_index] != ' ')
-			++len;
+		++len;
 	ret = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ret)
 		return (NULL);
 	len = 0;
 	while (str[path_start_index])
 	{
-		if (str[path_start_index] != ' ')
-		{
-			ret[len] = str[path_start_index];
-			++len;
-		}
+		ret[len] = str[path_start_index];
+		++len;
 		++path_start_index;
 	}
 	ret[len] = '\0';
