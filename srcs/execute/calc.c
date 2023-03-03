@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/03 14:37:22 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 15:31:10 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ void	move_ray_until_hit(t_mlx_info *in, t_calc *c_in)
 		if (in->world_map[c_in->mapx][c_in->mapy] > 0)
 			c_in->hit = 1;
 	}
-}
-
-void	calc_second(t_mlx_info *in, t_calc *c_in)
-{
 	if (c_in->side == 0)
 		c_in->perpwalldist = \
 			(c_in->mapx - in->posx + (1 - c_in->stepx) / 2) / c_in->raydirx;
 	else
 		c_in->perpwalldist = \
 			(c_in->mapy - in->posy + (1 - c_in->stepy) / 2) / c_in->raydiry;
+}
+
+void	calc_second(t_mlx_info *in, t_calc *c_in)
+{
 	c_in->lineheight = (int)(WINDOW_HEIGHT / c_in->perpwalldist);
 	c_in->drawstart = -c_in->lineheight / 2 + WINDOW_HEIGHT / 2;
 	if (c_in->drawstart < 0)

@@ -6,26 +6,14 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:30 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/03 14:12:54 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 15:28:42 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	leakcheck(void)
-{
-	system("leaks --list cub3d");
-}
-
-int	close_window(t_mlx_info *info)
-{
-	mlx_destroy_window(info->mlx, info->win);
-	exit(0);
-}
-
 int	main_loop(t_mlx_info *info)
 {
-	// draw_floor(info);
 	calc(info);
 	draw(info);
 	key_update(info);
@@ -37,7 +25,6 @@ int	main(int argc, char *argv[])
 	t_mlx_info	mlx_info;
 	t_map_data	*map_data;
 
-	// atexit(leakcheck);
 	map_data = NULL;
 	if (argc != 2)
 		return (print_error_msg("Check number of inputs", -1));

@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 20:36:20 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/03 14:38:43 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 15:24:41 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	load_texture(t_mlx_info *info, t_map_data *data)
 	load_image(info, info->texture[1], data->west_tex_path, &img);
 	load_image(info, info->texture[2], data->south_tex_path, &img);
 	load_image(info, info->texture[3], data->north_tex_path, &img);
+	info->texture[4] = NULL;
 }

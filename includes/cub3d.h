@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/03 14:38:55 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 15:27:44 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ char		*get_next_line(int fd);
 char		*make_temp(void);
 char		*memory_set(int index, int ckt);
 
+	/* error_handling */
+int			close_window(t_mlx_info *info);
 int			print_error_msg(char *message, int _errno);
-void		free_all_memory(t_mlx_info *_info, t_map_data *_data);
 int			free_map_data(t_map_data *_data);
 
 /************************************************/
@@ -78,6 +79,10 @@ void		calc(t_mlx_info *info);
 int			key_press(int key, t_mlx_info *info);
 int			key_release(int key, t_mlx_info *info);
 int			key_update(t_mlx_info *info);
+	/* key_event.c */
+void		updown(t_mlx_info *info, int sign);
+void		leftright(t_mlx_info *info, int sign);
+void		rotate(t_mlx_info *info, int sign);
 	/* render.c */
 void		load_texture(t_mlx_info *info, t_map_data *data);
 void		load_image(t_mlx_info *info, int *texture, char *path, t_img *img);

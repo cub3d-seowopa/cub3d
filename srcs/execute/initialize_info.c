@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:44:12 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/03 12:33:40 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 15:24:24 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_mlx_info(t_mlx_info *info, t_map_data *data)
 	info->img.img = mlx_new_image(info->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, \
 									&info->img.size_l, &info->img.endian);
-	info->texture = malloc(sizeof(int *) * 8);
+	info->texture = malloc(sizeof(int *) * 5);
 	if (!info->texture)
 		exit(free_map_data(data));
 	info->key.key_w = 0;
