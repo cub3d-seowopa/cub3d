@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:41 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/03 12:35:24 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 14:38:55 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,5 @@ int			key_update(t_mlx_info *info);
 void		load_texture(t_mlx_info *info, t_map_data *data);
 void		load_image(t_mlx_info *info, int *texture, char *path, t_img *img);
 void		draw(t_mlx_info *info);
-void		draw_floor(t_mlx_info *info);
 
 #endif /* CUB3D_H */

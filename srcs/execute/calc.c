@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/03 13:07:05 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 14:37:22 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	calc_second(t_mlx_info *in, t_calc *c_in)
 	c_in->drawend = c_in->lineheight / 2 + WINDOW_HEIGHT / 2;
 	if (c_in->drawend >= WINDOW_HEIGHT)
 		c_in->drawend = WINDOW_HEIGHT - 1;
-	// set texture number. modified based on wall direction */
 	if (c_in->side == 0 && c_in->raydirx > 0)
 		c_in->texnum = 2;
 	else if (c_in->side == 0 && c_in->raydirx < 0)
@@ -98,7 +97,6 @@ void	calc_third(t_mlx_info *in, t_calc *c_in, int x)
 	int	y;
 
 	c_in->texx = (int)(c_in->wallx * (double)TEXWIDTH);
-	/* 텍스쳐 대칭 보정 */
 	if (c_in->side == 0 && c_in->raydirx > 0)
 		c_in->texx = TEXWIDTH - c_in->texx - 1;
 	if (c_in->side == 1 && c_in->raydiry < 0)
@@ -106,10 +104,12 @@ void	calc_third(t_mlx_info *in, t_calc *c_in, int x)
 	c_in->step = 1.0 * TEXHEIGHT / c_in->lineheight;
 	c_in->texpos = (c_in->drawstart - WINDOW_HEIGHT / 2 \
 					+ c_in->lineheight / 2) * c_in->step;
+	y = -1;
+	while (++y < c_in->drawstart - 1)
+		in->buf[y][x] = in->ceiling_rgb;
 	y = c_in->drawstart - 1;
 	while (++y < c_in->drawend)
 	{
-		/* 유일하게 이해 안가는 부분. 오버플로우 방지? */
 		c_in->texy = (int)c_in->texpos & (TEXHEIGHT - 1);
 		c_in->texpos += c_in->step;
 		c_in->color = \
@@ -117,6 +117,8 @@ void	calc_third(t_mlx_info *in, t_calc *c_in, int x)
 		in->buf[y][x] = c_in->color;
 		in->re_buf = 1;
 	}
+	while (++y < WINDOW_HEIGHT)
+		in->buf[y][x] = in->floor_rgb;
 }
 
 void	calc(t_mlx_info *info)

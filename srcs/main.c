@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:03:30 by seowokim          #+#    #+#             */
-/*   Updated: 2023/03/03 13:21:03 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/03 14:12:54 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	close_window(t_mlx_info *info)
 
 int	main_loop(t_mlx_info *info)
 {
-	draw_floor(info);
+	// draw_floor(info);
 	calc(info);
 	draw(info);
 	key_update(info);

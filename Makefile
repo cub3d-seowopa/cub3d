@@ -6,11 +6,11 @@
 #    By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 12:03:27 by seowokim          #+#    #+#              #
-#    Updated: 2023/03/03 12:03:07 by seowokim         ###   ########seoul.kr   #
+#    Updated: 2023/03/03 14:32:03 by seowokim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 SRCS_DIR = ./srcs
 ERROR_DIR = error

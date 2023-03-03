@@ -1,13 +1,15 @@
 NO ./textures/purplestone.xpm
 SO ./textures/bluestone.xpm
 EA ./textures/wood.xpm
-WE ./textures/redbrick.xpm
 
-F 220,100,0
-C 225,30,0
+
+WE              ./textures/redbrick.xpm
+
+F 225, 0, 218
+C 0, 225, 169
 
  111111
-100W0001
-10000001
+101E0001
+10010001
 10000001
  111111
