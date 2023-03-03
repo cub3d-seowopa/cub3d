@@ -2,3 +2,7 @@
 objs/
 .DS_Store
 *.o
+cub3d
+libft/libft.a
+mlx/libmlx.a
+tmp.cub
