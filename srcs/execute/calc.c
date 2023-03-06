@@ -6,7 +6,7 @@
 /*   By: seowokim <seowokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:35:14 by chanwopa          #+#    #+#             */
-/*   Updated: 2023/03/03 15:31:10 by seowokim         ###   ########seoul.kr  */
+/*   Updated: 2023/03/06 18:07:44 by seowokim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,8 @@ void	calc_third(t_mlx_info *in, t_calc *c_in, int x)
 	c_in->texpos = (c_in->drawstart - WINDOW_HEIGHT / 2 \
 					+ c_in->lineheight / 2) * c_in->step;
 	y = -1;
-	while (++y < c_in->drawstart - 1)
+	while (++y < c_in->drawstart)
 		in->buf[y][x] = in->ceiling_rgb;
-	y = c_in->drawstart - 1;
 	while (++y < c_in->drawend)
 	{
 		c_in->texy = (int)c_in->texpos & (TEXHEIGHT - 1);
@@ -117,8 +116,8 @@ void	calc_third(t_mlx_info *in, t_calc *c_in, int x)
 		in->buf[y][x] = c_in->color;
 		in->re_buf = 1;
 	}
-	while (++y < WINDOW_HEIGHT)
-		in->buf[y][x] = in->floor_rgb;
+	while (y < WINDOW_HEIGHT)
+		in->buf[y++][x] = in->floor_rgb;
 }
 
 void	calc(t_mlx_info *info)
